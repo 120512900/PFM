@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pfm.mapper.AccountMapper">
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultType="com.example.pfm.entity.Account">
+    select
+      *
+    from account
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <update id="update" parameterType="decimal" >
+    update account
+    set amount=#{amount,jdbcType=DECIMAL}
+    where id = 1
+  </update>
+
+
+
+</mapper>

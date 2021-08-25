@@ -1,12 +1,10 @@
 package com.example.pfm.req;
 
-import io.swagger.annotations.ApiModelProperty;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
-public class IncomeRecordReq extends PageReq{
+public class ListSpendRecordReq extends PageReq{
 
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date date;
