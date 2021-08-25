@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pfm.mapper.IncomeRecordMapperCust">
+
+  <select id="selectIncome" parameterType="DATE" resultType="com.example.pfm.resp.IncomeOfCategoryResp">
+    SELECT income_category_id incomeCategoryId, SUM(amount) total
+    FROM
+      income_record
+    where  DATE_FORMAT(date,'%Y%m')=DATE_FORMAT(#{date,jdbcType=DATE},'%Y%m')
+
+    group by income_category_id
+  </select>
+
+
+
+
+
+</mapper>

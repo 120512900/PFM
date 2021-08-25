@@ -7,6 +7,7 @@ import com.example.pfm.req.IncomeRecordReq;
 import com.example.pfm.req.IncomeReq;
 import com.example.pfm.req.PageReq;
 import com.example.pfm.resp.CommonResp;
+import com.example.pfm.resp.IncomeOfCategoryResp;
 import com.example.pfm.resp.PageResp;
 import com.example.pfm.service.IncomeRecordService;
 import com.example.pfm.util.CopyUtil;
@@ -42,6 +43,15 @@ public class IncomeRecordController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        resp.setContent(list);
+        return resp;
+    }
+
+    @GetMapping("/listCategory")
+    public CommonResp listCategory(@Valid IncomeReq req) {
+        CommonResp<List> resp = new CommonResp<>();
+        List<IncomeOfCategoryResp> list = incomeRecordService.listCategory(req);
+
         resp.setContent(list);
         return resp;
     }

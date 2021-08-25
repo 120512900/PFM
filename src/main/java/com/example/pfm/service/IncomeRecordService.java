@@ -5,8 +5,11 @@ import com.example.pfm.entity.IncomeRecordExample;
 import com.example.pfm.entity.SpendCategory;
 import com.example.pfm.mapper.IncomeRecordMapper;
 import com.example.pfm.mapper.IncomeRecordMapper;
+import com.example.pfm.mapper.IncomeRecordMapperCust;
 import com.example.pfm.req.IncomeRecordReq;
+import com.example.pfm.req.IncomeReq;
 import com.example.pfm.req.PageReq;
+import com.example.pfm.resp.IncomeOfCategoryResp;
 import com.example.pfm.resp.PageResp;
 import com.example.pfm.util.CopyUtil;
 import com.github.pagehelper.PageHelper;
@@ -26,6 +29,9 @@ public class IncomeRecordService {
 
     @Autowired
     private IncomeRecordMapper incomeRecordMapper;
+
+    @Autowired
+    private IncomeRecordMapperCust incomeRecordMapperCust;
 
    /* public List<IncomeRecord> list(){
         return incomeRecordMapper.selectByExample(null);
@@ -130,5 +136,11 @@ public class IncomeRecordService {
             ans=ans.add(incomeRecord.getAmount());
         }
         return ans;
+    }
+
+    public List<IncomeOfCategoryResp> listCategory(IncomeReq req) {
+
+System.out.println(req.getDate());
+         return incomeRecordMapperCust.selectIncome(req.getDate());
     }
 }
