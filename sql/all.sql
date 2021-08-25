@@ -44,92 +44,118 @@ INSERT INTO `account` VALUES (1,'admin',0.00);
 UNLOCK TABLES;
 
 --
--- Table structure for table `category`
+-- Table structure for table `income_category`
 --
 
-DROP TABLE IF EXISTS `category`;
+DROP TABLE IF EXISTS `income_category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `category` (
+CREATE TABLE `income_category` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
-  `record_type_id` int NOT NULL,
-  `budget` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `name_UNIQUE` (`name`),
-  KEY `id_idx` (`record_type_id`),
-  CONSTRAINT `id` FOREIGN KEY (`record_type_id`) REFERENCES `record_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `name_UNIQUE` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `category`
+-- Dumping data for table `income_category`
 --
 
-LOCK TABLES `category` WRITE;
-/*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'Travel',2,1000.00),(2,'Groceries',2,1500.00),(3,'Salary',1,10000.00);
-/*!40000 ALTER TABLE `category` ENABLE KEYS */;
+LOCK TABLES `income_category` WRITE;
+/*!40000 ALTER TABLE `income_category` DISABLE KEYS */;
+INSERT INTO `income_category` VALUES (1,'Salary');
+/*!40000 ALTER TABLE `income_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `record`
+-- Table structure for table `income_record`
 --
 
-DROP TABLE IF EXISTS `record`;
+DROP TABLE IF EXISTS `income_record`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `record` (
+CREATE TABLE `income_record` (
   `id` int NOT NULL AUTO_INCREMENT,
   `amount` decimal(10,2) NOT NULL,
-  `category_id` int NOT NULL,
+  `income_category_id` int NOT NULL,
   `description` varchar(200) DEFAULT NULL,
   `account_id` int NOT NULL DEFAULT '1',
-  `record_type_id` int NOT NULL,
-  `Date` date DEFAULT NULL,
+  `date` date DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `cid_idx` (`category_id`),
-  KEY `aid_idx` (`account_id`),
-  KEY `tid_idx` (`record_type_id`),
-  CONSTRAINT `aid` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`),
-  CONSTRAINT `cid` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`),
-  CONSTRAINT `tid` FOREIGN KEY (`record_type_id`) REFERENCES `record_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `income_category_id_idx` (`income_category_id`),
+  KEY `account_id_idx` (`account_id`),
+  CONSTRAINT `account_id` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`),
+  CONSTRAINT `income_category_id` FOREIGN KEY (`income_category_id`) REFERENCES `income_category` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `record`
+-- Dumping data for table `income_record`
 --
 
-LOCK TABLES `record` WRITE;
-/*!40000 ALTER TABLE `record` DISABLE KEYS */;
-INSERT INTO `record` VALUES (1,50.00,1,NULL,1,2,'2021-08-22'),(2,500.00,3,NULL,1,1,'2021-08-24'),(3,100.00,2,NULL,1,2,'2021-08-25');
-/*!40000 ALTER TABLE `record` ENABLE KEYS */;
+LOCK TABLES `income_record` WRITE;
+/*!40000 ALTER TABLE `income_record` DISABLE KEYS */;
+INSERT INTO `income_record` VALUES (1,500.00,1,NULL,1,'2020-08-23');
+/*!40000 ALTER TABLE `income_record` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `record_type`
+-- Table structure for table `spend_category`
 --
 
-DROP TABLE IF EXISTS `record_type`;
+DROP TABLE IF EXISTS `spend_category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `record_type` (
+CREATE TABLE `spend_category` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
+  `budget` decimal(10,2) DEFAULT '0.00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `record_type`
+-- Dumping data for table `spend_category`
 --
 
-LOCK TABLES `record_type` WRITE;
-/*!40000 ALTER TABLE `record_type` DISABLE KEYS */;
-INSERT INTO `record_type` VALUES (1,'income'),(2,'spend');
-/*!40000 ALTER TABLE `record_type` ENABLE KEYS */;
+LOCK TABLES `spend_category` WRITE;
+/*!40000 ALTER TABLE `spend_category` DISABLE KEYS */;
+INSERT INTO `spend_category` VALUES (1,'Travel',1000.00),(2,'Groceries',1500.00);
+/*!40000 ALTER TABLE `spend_category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `spend_record`
+--
+
+DROP TABLE IF EXISTS `spend_record`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `spend_record` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `amount` decimal(10,2) NOT NULL,
+  `spend_category_id` int NOT NULL,
+  `description` varchar(200) DEFAULT NULL,
+  `account_id` int NOT NULL DEFAULT '1',
+  `date` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `account_id_idx` (`account_id`),
+  KEY `spend_category_id_idx` (`spend_category_id`),
+  CONSTRAINT `account_id_spend` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`),
+  CONSTRAINT `spend_category_id` FOREIGN KEY (`spend_category_id`) REFERENCES `spend_category` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `spend_record`
+--
+
+LOCK TABLES `spend_record` WRITE;
+/*!40000 ALTER TABLE `spend_record` DISABLE KEYS */;
+INSERT INTO `spend_record` VALUES (1,100.00,1,NULL,1,'2021-08-26'),(2,500.00,2,NULL,1,'2020-08-24');
+/*!40000 ALTER TABLE `spend_record` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -141,4 +167,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-25  7:51:40
+-- Dump completed on 2021-08-25 11:23:33
