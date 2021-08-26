@@ -45,5 +45,7 @@ public class SpendCategoryService {
         int flag = spendCategoryMapper.deleteByPrimaryKey(id);
         return flag==1;
     }
-
+    public String list1(int id) {
+        return spendCategoryMapper.selectByPrimaryKey(id).getName();
+    }
 }

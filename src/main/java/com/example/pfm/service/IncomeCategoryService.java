@@ -37,4 +37,7 @@ public class IncomeCategoryService {
     }
 
 
+    public String list1(int id) {
+        return incomeCategoryMapper.selectByPrimaryKey(id).getName();
+    }
 }

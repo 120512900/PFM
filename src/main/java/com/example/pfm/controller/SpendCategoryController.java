@@ -24,6 +24,12 @@ public class SpendCategoryController {
     public List<SpendCategory> list() {
         return spendCategoryService.list();
     }
+
+    @GetMapping("/{id}")
+    public String  list1(@PathVariable int id) {
+        return spendCategoryService.list1(id);
+    }
+
     @GetMapping("/allBudget")
     public BigDecimal getAllBudget(){
 

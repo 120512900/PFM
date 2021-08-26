@@ -25,6 +25,11 @@ public class IncomeCategoryController {
         return incomeCategoryService.list();
     }
 
+    @GetMapping("/{id}")
+    public String  list1(@PathVariable int id) {
+        return incomeCategoryService.list1(id);
+    }
+
   /*  @RequestMapping(value = "/post", method = RequestMethod.POST)
     public boolean add(String name) {
             IncomeCategory incomeCategory = new IncomeCategory();

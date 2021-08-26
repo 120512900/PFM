@@ -5,7 +5,9 @@ import com.example.pfm.entity.SpendRecord;
 import com.example.pfm.mapper.SpendRecordMapper;
 import com.example.pfm.req.*;
 import com.example.pfm.resp.CommonResp;
+import com.example.pfm.resp.IncomeOfCategoryResp;
 import com.example.pfm.resp.PageResp;
+import com.example.pfm.resp.SpendOfCategoryResp;
 import com.example.pfm.service.SpendRecordService;
 import com.example.pfm.util.CopyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,15 @@ public class SpendRecordController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        resp.setContent(list);
+        return resp;
+    }
+
+    @GetMapping("/listCategory")
+    public CommonResp listCategory(@Valid SpendReq req) {
+        CommonResp<List> resp = new CommonResp<>();
+        List<SpendOfCategoryResp> list = spendRecordService.listCategory(req);
+
         resp.setContent(list);
         return resp;
     }
