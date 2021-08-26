@@ -11,6 +11,7 @@ import com.example.pfm.resp.IncomeOfCategoryResp;
 import com.example.pfm.resp.PageResp;
 import com.example.pfm.service.IncomeRecordService;
 import com.example.pfm.util.CopyUtil;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -46,7 +47,7 @@ public class IncomeRecordController {
         resp.setContent(list);
         return resp;
     }
-
+    @ApiOperation("参数是一个日期 可以得到日期所在的这个月份的不同类别的收入是多少")
     @GetMapping("/listCategory")
     public CommonResp listCategory(@Valid IncomeReq req) {
         CommonResp<List> resp = new CommonResp<>();
@@ -55,7 +56,7 @@ public class IncomeRecordController {
         resp.setContent(list);
         return resp;
     }
-
+    @ApiOperation("参数是一个日期 可以得到日期所在的这个月份总收入是多少")
     @GetMapping("/income")
     public BigDecimal getIncome(@Valid IncomeReq req) {
 

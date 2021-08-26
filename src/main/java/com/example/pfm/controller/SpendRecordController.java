@@ -10,6 +10,7 @@ import com.example.pfm.resp.PageResp;
 import com.example.pfm.resp.SpendOfCategoryResp;
 import com.example.pfm.service.SpendRecordService;
 import com.example.pfm.util.CopyUtil;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class SpendRecordController {
             return flag;
         }
     }*/
-
+    @ApiOperation("参数是一个日期 可以得到日期所在的这个月份的花费列表")
     @GetMapping("/list")
     public CommonResp list(@Valid ListSpendRecordReq req) {
         CommonResp<PageResp<SpendRecord>> resp = new CommonResp<>();
@@ -53,7 +54,7 @@ public class SpendRecordController {
         resp.setContent(list);
         return resp;
     }
-
+    @ApiOperation("参数是一个日期 可以得到日期所在的这个月份的不同类别的支出是多少")
     @GetMapping("/listCategory")
     public CommonResp listCategory(@Valid SpendReq req) {
         CommonResp<List> resp = new CommonResp<>();
@@ -62,7 +63,7 @@ public class SpendRecordController {
         resp.setContent(list);
         return resp;
     }
-
+    @ApiOperation("参数是一个日期 可以得到日期所在的这个月份的总支出")
     @GetMapping("/spend")
     public BigDecimal getSpend(@Valid SpendReq req) {
 

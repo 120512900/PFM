@@ -5,6 +5,7 @@ import com.example.pfm.mapper.SpendCategoryMapper;
 import com.example.pfm.req.SpendCategoryReq;
 import com.example.pfm.service.SpendCategoryService;
 import com.example.pfm.util.CopyUtil;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -24,12 +25,13 @@ public class SpendCategoryController {
     public List<SpendCategory> list() {
         return spendCategoryService.list();
     }
-
+    @ApiOperation("根据ID查类别名称")
     @GetMapping("/{id}")
     public String  list1(@PathVariable int id) {
         return spendCategoryService.list1(id);
     }
 
+    @ApiOperation("总预算")
     @GetMapping("/allBudget")
     public BigDecimal getAllBudget(){
 

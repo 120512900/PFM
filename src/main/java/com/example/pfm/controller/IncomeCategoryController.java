@@ -5,6 +5,7 @@ import com.example.pfm.mapper.IncomeCategoryMapper;
 import com.example.pfm.req.IncomeCategoryReq;
 import com.example.pfm.service.IncomeCategoryService;
 import com.example.pfm.util.CopyUtil;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,11 +21,12 @@ public class IncomeCategoryController {
     @Autowired
     private IncomeCategoryService incomeCategoryService;
 
+    @ApiOperation("get a list： all incomecategories")
     @GetMapping("/list")
     public List<IncomeCategory> list() {
         return incomeCategoryService.list();
     }
-
+    @ApiOperation("get incomecategory name by id")
     @GetMapping("/{id}")
     public String  list1(@PathVariable int id) {
         return incomeCategoryService.list1(id);
